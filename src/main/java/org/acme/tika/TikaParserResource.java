@@ -27,7 +27,7 @@ public class TikaParserResource {
     private List<Person> persons = new ArrayList<>();
 
     private static final Pattern PHONE_PATTERN =
-            Pattern.compile("[\\d]{11}");
+            Pattern.compile("((13[0-9])|(15[0-9])|(18[0-9])|(17[0-9])|(147))\\d{8}");
 
     private static final Pattern ID_CARD_PATTERN =
             Pattern.compile("([1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx])|([1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3})");
@@ -70,20 +70,24 @@ public class TikaParserResource {
 
         int nameIndex = result.indexOf("姓");
         int sexIndex = result.indexOf("别：");
+        int phoneIndex = result.indexOf("联系电话");
+        int barcodeIndex = result.indexOf("客户条码：");
 
         String name = result.substring(sexIndex + 2, nameIndex);
         System.out.println(name);
         person.setName(name);
-        String phoneRegex = "[\\d]{11}";
-        Pattern p = Pattern.compile(phoneRegex);
+
+        String phone = result.substring(phoneIndex - 11, phoneIndex);
+        person.setPhone(phone);
+
+        String barcode = result.substring(barcodeIndex+5,barcodeIndex+17);
+        person.setBarcode(barcode);
+
         Matcher m = PHONE_PATTERN.matcher(result);
         if (m.find()) {
             person.setPhone(m.group());
         }
 
-        String idRegex = "([1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx])|([1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3})";
-
-        p = Pattern.compile(idRegex);
         m = ID_CARD_PATTERN.matcher(result);
         if (m.find()) {
             person.setIdCard(m.group());

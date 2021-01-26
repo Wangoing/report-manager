@@ -8,6 +8,7 @@ public class Person {
     private String name;
     private String idCard;
     private String phone;
+    private String barcode;
 
     public String getName() {
         return name;
@@ -31,5 +32,13 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

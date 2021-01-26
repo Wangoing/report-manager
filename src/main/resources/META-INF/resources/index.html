@@ -118,12 +118,15 @@
   <div class="row">
     <div class="col-1">姓名</div>
     <div class="col-4">电话</div>
-    <div class="col-2">身份证</div>
+    <div class="col-3">身份证</div>
+    <div class="col-2">条形码</div>
+
   </div>
   <div class="row" ng-repeat="file in files">
     <div class="col-1">{{ file.name }}</a></div>
     <div class="col-4">{{ file.phone }}</div>
-    <div class="col-2">{{ file.idCard }}</div>
+    <div class="col-3">{{ file.idCard }}</div>
+    <div class="col-2">{{ file.barcode }}</div>
   </div>
 </div>
 
