@@ -82,13 +82,13 @@ public class TikaParserResource {
 
         String barcode = result.substring(barcodeIndex+5,barcodeIndex+17);
         person.setBarcode(barcode);
+//
+//        Matcher m = PHONE_PATTERN.matcher(result);
+//        if (m.find()) {
+//            person.setPhone(m.group());
+//        }
 
-        Matcher m = PHONE_PATTERN.matcher(result);
-        if (m.find()) {
-            person.setPhone(m.group());
-        }
-
-        m = ID_CARD_PATTERN.matcher(result);
+        Matcher m = ID_CARD_PATTERN.matcher(result);
         if (m.find()) {
             person.setIdCard(m.group());
         }
